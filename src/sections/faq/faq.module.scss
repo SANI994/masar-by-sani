@@ -1,0 +1,13 @@
+.accordion{
+
+      border: 1px solid #EDEDED;
+      border: 12px;
+}
+.accordion::before{
+    
+      display : none,
+}
+
+.accordion:not(:last-child){
+      border-bottom: 0;
+}

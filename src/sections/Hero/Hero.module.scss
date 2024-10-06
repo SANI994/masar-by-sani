@@ -1,0 +1,69 @@
+.hero {
+  position: relative;
+  // height: 94vh;
+  overflow: hidden;
+  .text {
+    position: relative;
+    z-index: 4;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    flex-direction: column;
+    h1 {
+      // font-style: normal;
+      font-weight: 900;
+      line-height: 78px;
+      color: #ffffff;
+    }
+    h2 {
+      // font-style: normal;
+      font-weight: 500;
+      color: #334961;
+    }
+  }
+  .image {
+    position: absolute;
+    overflow: hidden;
+    // width: 100%;
+    // height: -webkit-fill-available;
+    overflow: hidden;
+    height: 50vh;
+    width: 671px;
+    &:nth-child(1) {
+      z-index: 1;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+    }
+    &:nth-child(2) {
+      z-index: 2;
+    }
+    &:nth-child(3) {
+      z-index: 3;
+      right: 0;
+      text-align: center;
+    }
+    &:nth-child(4) {
+      z-index: 4;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+    }
+  }
+}
+
+.timerText{
+  font-weight: 700;
+}
+.timerUnit{
+  font-size: 16px;
+  font-weight: 300;
+}
