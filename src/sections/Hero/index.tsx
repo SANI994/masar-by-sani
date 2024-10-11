@@ -67,7 +67,7 @@ const Hero = ({onHover}:HeroT) => {
         <h1 className="text-[40px] !text-[#5CECCE] md:text-[64px] font-black">
           #جرب_تصنع_منتج
         </h1>
-        <div className="text-[28px] leading-10 sm:leading-[78px] mx-6 text-[#334961]">
+        <div className="text-[16px] md:text-[28px]  leading-10 sm:leading-[78px] mx-6 text-[#334961]">
       <p>  مسار من صانع هو طريقك لتترجم اهتمامك في        
       {" "}
        <AnimatePresence>
