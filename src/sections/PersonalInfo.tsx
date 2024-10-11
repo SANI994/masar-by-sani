@@ -145,7 +145,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
         <input
           {...formInputs("cumulative_GPA")}
           placeholder="Cumulative GPA"
-          type="tel"
+          type="text"
           className={"input"}
         />
       </div>
