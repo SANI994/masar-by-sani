@@ -25,8 +25,8 @@ const PathsDetails = () => {
             >
               <div className="flex flex-col items-center justify-center gap-6 w-full md:w-[400px] h-80 md:h-[260px] border-b border-l-0 md:border-b-0 md:border-l border-gray-300">
                 <Image
-                  width={240}
-                  height={240}
+                  width={pathDetails.width}
+                  height={217}
                   alt="speaker logo"
                   src={pathDetails.image}
                   className="rounded-full"

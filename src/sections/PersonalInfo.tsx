@@ -25,6 +25,7 @@ interface PersonalInfoProps {
 }
 
 const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
+  
   return (
     <section
       dir="rtl"
@@ -76,7 +77,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
         id="University"
         className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
-        <option>الجامعة</option>
+        <option value={""}>الجامعة</option>
         {UNIVERSITIES_LIST.map((university, i) => (
           <option key={i} value={university}>
             {university}
@@ -89,7 +90,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
         id="colleges"
         className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
-        <option>الكلية</option>
+        <option value={""}>الكلية</option>
         {COLLEGES_LIST.map((college, i) => (
           <option key={i} value={college}>
             {college}
@@ -109,7 +110,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
         {...formInputs("expected_grad_year")}
         className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
-        <option>تاريخ التخرج المتوقع</option>
+        <option value={""}>تاريخ التخرج المتوقع</option>
 
         {GRADUATION_YEARS_LIST.map((year, i) => (
           <option key={i} value={year}>
@@ -119,12 +120,28 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
       </select>
 
       <div className="flex gap-6">
-        <input
+       
+        {/* <input
           {...formInputs("gpA_max_scale")}
           placeholder="GPA Max Scale"
           type="tel"
           className={"input"}
-        />
+        /> */}
+         <select
+        id="gpA_max_scale"
+        {...formInputs("gpA_max_scale")}
+        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option value={""}>GPA Max Scale  </option>
+        <option value={"4"}> 4 </option>
+        <option value={"5"}> 5 </option>
+        <option value={"100"}> 100 </option>
+
+        
+      </select>
+      
+
+        
         <input
           {...formInputs("cumulative_GPA")}
           placeholder="Cumulative GPA"

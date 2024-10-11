@@ -168,6 +168,9 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
             className={"input"}
           />
 
+<h1 className="text-[#334961]  my-4  font-semibold">
+وسائل تواصل
+        </h1>
           <input
             {...formInputs("linkedin")}
             placeholder="لينكد إن"
@@ -177,7 +180,7 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
 
           <input
             {...formInputs("github")}
-            placeholder="قيت هب"
+            placeholder="(اختياري) قيت هب"
             type="text"
             className={"input"}
           />

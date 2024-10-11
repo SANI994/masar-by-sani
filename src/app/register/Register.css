@@ -1,92 +1,97 @@
-.input{
-border-radius: 12px;
-border: 1px solid #C0BEBE;
-padding: 18px;
-font-size: 16px;
-font-weight: 400;
-color: #334961;
-background-color: transparent;
-width: 100%;
+.input {
+  border-radius: 12px;
+  border: 1px solid #c0bebe;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #334961;
+  background-color: transparent;
+  width: 100%;
 }
-.input:focus{
-      outline: 1px solid #5CECCE;
-      
-      }
-.label{
-font-size: 14px;
-font-weight: 300;
-color: #707070;
+.input:focus {
+  outline: 1px solid #5cecce;
 }
-
-.checkbox{
-      accent-color: forestgreen;
-}
-.registerBtn{
-      border-radius: 12px;
-background: linear-gradient(101deg, #5CECCE -23.68%, #4fd2b8 121%, rgba(51, 193, 253, 0.00) 131.89%);
-      width: 100%;
-      height: 42px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      color: #F6FBFF;
-      font-weight: 500; 
-      cursor: pointer;
-}
-.InValidregisterBtn{
-      border-radius: 12px;
-background: gray;
-      width: 318px;
-      height: 62px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      color: #F6FBFF;
-      font-weight: 500; 
-      cursor: not-allowed;
-}
-.addBtn{
-      border-radius: 12px;
-      border: 1px solid #5151DD;
-      width: 318px;
-      height: 62px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 16px;
-      color: #5151DD;
-      font-weight: 500;
-      cursor: pointer;
+.label {
+  font-size: 14px;
+  font-weight: 300;
+  color: #707070;
 }
 
-.userCard{
-      border-radius: 28px;
-border: 0.5px solid #5B2ED3;
-background: rgba(91, 46, 211, 0.15);
-font-size: 12px;
-display: flex;
-gap:12px;
-padding: 13px;
-align-items: center;
+.checkbox {
+  accent-color: forestgreen;
+}
+.registerBtn {
+  border-radius: 12px;
+  background: linear-gradient(
+    101deg,
+    #5cecce -23.68%,
+    #4fd2b8 121%,
+    rgba(51, 193, 253, 0) 131.89%
+  );
+  width: 100%;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #f6fbff;
+  font-weight: 500;
+  cursor: pointer;
+}
+.InValidregisterBtn {
+  border-radius: 12px;
+  background: white;
+  width: 100%;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: grey;
+  border: 1px solid grey;
+  font-weight: 500;
+  cursor: not-allowed;
+}
+.addBtn {
+  border-radius: 12px;
+  border: 1px solid #5151dd;
+  width: 318px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #5151dd;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.userShort{
-      background: linear-gradient(214deg, #36B7FA 13.45%, #5B2ED3 111.99%);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #F6FBFF;
-      text-transform: uppercase;
+.userCard {
+  border-radius: 28px;
+  border: 0.5px solid #5b2ed3;
+  background: rgba(91, 46, 211, 0.15);
+  font-size: 12px;
+  display: flex;
+  gap: 12px;
+  padding: 13px;
+  align-items: center;
 }
 
-.leadrIcon{
-      position: absolute;
-      width: 24px;
-      top: -10px;
-      right: 18px;
+.userShort {
+  background: linear-gradient(214deg, #36b7fa 13.45%, #5b2ed3 111.99%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f6fbff;
+  text-transform: uppercase;
+}
+
+.leadrIcon {
+  position: absolute;
+  width: 24px;
+  top: -10px;
+  right: 18px;
 }

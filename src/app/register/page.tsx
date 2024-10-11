@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable */
 import RolesCards from "@/sections/RolesCards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { REGISTERATION_SCREENS, RolesList } from "../constants";
 import PersonalInfo from "@/sections/PersonalInfo";
 import WorkInfo from "@/sections/WorkInfo";
@@ -21,8 +21,10 @@ type RoleProps = {
 };
 
 const Register = () => {
-  const { register, handleSubmit, getValues } = useForm<any>();
+  const { register, handleSubmit, getValues,watch } = useForm<any>();
   const [formSubmiting, setFormSubmitting] = useState(false);
+  const [personalDataValid, setPersonalDataValid] = useState(false);
+  const [workDataValid, setWorkDataValid] = useState(false);
   const [backendErrors, setBackendErrors] = useState<any>([]);
   const [currentScreen, setCurrentScreen] = useState(REGISTERATION_SCREENS[0]);
   const [selectedRole, setSelectedRole] = useState<RoleProps>({} as RoleProps);
@@ -31,8 +33,7 @@ const Register = () => {
     const nextScreen = REGISTERATION_SCREENS.find(
       (screen) => screen.current == currentScreen.next
     );
-    console.log(nextScreen);
-    if (nextScreen) setCurrentScreen(nextScreen);
+    if (nextScreen && personalDataValid) setCurrentScreen(nextScreen);
   };
   const onPrevScreen = () => {
     const prevScreen = REGISTERATION_SCREENS.find(
@@ -49,15 +50,13 @@ const Register = () => {
   const onSubmit = (data: any) => {
     const SubmitURL =
       "https://maser-app-x6wzd.ondigitalocean.app/api/educationForm/submit";
-    // call the backend https://maser-app-x6wzd.ondigitalocean.app/swagger/index.html
     data["program"] = selectedRole.value;
     data["why_maser_why_do_you_think_you_are_a_candidate"] = "-";
     setFormSubmitting(true);
-    if (!formSubmiting) {
+    if (!formSubmiting && workDataValid && personalDataValid) {
       axios
         .post(SubmitURL, data)
         .then((data) => {
-          console.log(data, " :response");
           setFormSubmitting(false);
           setCurrentScreen(REGISTERATION_SCREENS[3]);
         })
@@ -78,6 +77,30 @@ const Register = () => {
   const onClearError = () => {
     setBackendErrors([]);
   };
+const watchPersonalData = watch(["full_name", "full_name_arabic","email","id_number","phone_number","university","college", "major", "expected_grad_year", "gpA_max_scale", "cumulative_GPA"])
+const watchWorkData = watch(["work_experiences", "project_course","why_did_you_choose_this_track","talk_about_yourself_video","phone_number","linkedin","anything_else_you_want_to_tell_us"])
+useEffect(() => {
+    if(watchPersonalData.filter((data)=> !!data).length == watchPersonalData.length){
+      setPersonalDataValid(true)
+      return
+    }else{
+      if (!personalDataValid)
+        setPersonalDataValid(false)
+    }
+   
+  }, [watchPersonalData]);
+
+  useEffect(() => {
+    if(watchWorkData.filter((data)=> !!data).length == watchWorkData.length){
+      setWorkDataValid(true)
+      return
+    }else{
+      if (!workDataValid)
+        setWorkDataValid(false)
+    }
+   
+  }, [watchWorkData]);
+
   return (
     <div className="flex flex-col items-center">
       <Navbar showLogoOnly />
@@ -135,7 +158,7 @@ const Register = () => {
                 <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
                   {!!currentScreen.next && !!currentScreen.prev ? (
                     <div
-                      className="registerBtn cursor-pointer px-4"
+                      className={`cursor-pointer px-4 ${!personalDataValid ? "InValidregisterBtn":"registerBtn"}`}
                       onClick={onNextScreen}
                     >
                       <p>التالي</p>
@@ -149,7 +172,7 @@ const Register = () => {
                 <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
                   <button
                     type={formSubmiting ? "button" : "submit"}
-                    className="registerBtn"
+                    className={`${!workDataValid? 'InValidregisterBtn':'registerBtn'}`}
                   >
                     {formSubmiting ? "جاري التحميل" : "إرسال"}
                   </button>
