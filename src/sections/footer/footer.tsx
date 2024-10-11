@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -8,22 +9,22 @@ export default function Footer() {
       dir="rtl"
       style={{ backgroundImage: `url(/footer-background.svg)` }}
     >
-      <img src="./imgs/masar_logo_blue.png" width={186} alt="white logo" />
+      <Image src="/imgs/masar_logo_green.png" width={186} height={186} alt="white logo" />
       <ul className="flex justify-center gap-8 md:gap-0 md:justify-around flex-wrap list-disc w-full mt-[31px] mb-[51px]">
         <li>
           <Link href="#tracks">المسارات</Link>
         </li>
         <li>
-          <Link href="#goals">الاهداف</Link>
+          <Link href="#goals">المراحل</Link>
         </li>
         <li>
         <Link href="#about">
-          عن المسابقة
+          عن البرنامج
           </Link>
         </li>
         <li>
         <Link href="#timeline"> 
-          مراحل المشاركة
+          الخط الزمني
           </Link>
           </li>
         <li>
@@ -41,7 +42,7 @@ export default function Footer() {
             <Link href="#terms">الشروط</Link>
             </p>
             <Link href={"/register"}>
-            التسجيل في المسابقة
+            التسجيل في البرنامج
              </Link>
           
         </div>

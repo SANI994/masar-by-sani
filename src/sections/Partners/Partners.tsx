@@ -1,61 +1,76 @@
 "use client";
-
+import { Title } from "@/components/Texts";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Partners() {
   const IMAGES_LIST = [
+    // {
+    //   src: "/imgs/partners/tanmia-bank.png",
+    //   alt: "partner logo",
+    //   width:240,
+    //   height:200,
+    // },
+    // {
+    //   src: "/imgs/partners/KSU.png",
+    //   alt: "partner logo",
+    //    width:160,
+    //   height:200,
+    // },
     {
-      src: "./imgs/partners/tanmia-bank.png",
+      src: "/imgs/partners/KACST.svg",
       alt: "partner logo",
-      width:84,
-      height:76,
+      width:180,
+      height:100,
+    },
+    // {
+    //   src: "/imgs/partners/mmo.png",
+    //   alt: "partner logo",
+    //   width:260,
+    //   height:200,
+    // },
+    {
+      src: "/imgs/partners/almarai.png",
+      alt: "partner logo",
+       width:160,
+      height:200,
     },
     {
-      src: "./imgs/partners/KSU.png",
+      src: "/imgs/partners/ntdp.svg",
       alt: "partner logo",
-       width:84,
-      height:76,
+       width:210,
+      height:80,
     },
     {
-      src: "./imgs/partners/KACST.png",
+      src: "/imgs/partners/mcit.svg",
       alt: "partner logo",
-      width:84,
-      height:76,
+       width:280,
+      height:87,
     },
     {
-      src: "./imgs/partners/mmo.png",
+      src: "/imgs/partners/jahez.svg",
       alt: "partner logo",
-      width:84,
-      height:76,
-    },
-    {
-      src: "./imgs/partners/almarai.png",
-      alt: "partner logo",
-       width:84,
-      height:76,
-    },
-    {
-      src: "./imgs/partners/ntdp.png",
-      alt: "partner logo",
-       width:84,
-      height:76,
+       width:180,
+      height:87,
     }
   ];
+
+  
 
   return (
     <section id="#" className="py-2 mt-[30px] md:mt-19" dir="rtl">
       <div className="flex flex-col gap-4 items-center mb-14 text-center">
-        <h1 className="text-[#334961] text-[40px] font-semibold">
-          {" "}
-         الشركاء
-        </h1>
+       <Title title="الشركاء" />
+         
+        
       </div>
      
-      <div  className="flex flex-wrap gap-10 md:gap-20 sm:gap-10 justify-center my-[15px]">
+      <motion.div  className="flex flex-wrap gap-10 md:gap-20 sm:gap-10 justify-center items-center my-[15px]"
+      >
         {IMAGES_LIST.map((img, i) => {
-          return <motion.img initial={{filter:'grayscale(1)'}} whileHover={{filter:'grayscale(0)'}} whileTap={{filter:'grayscale(0)'}} width={img.width} key={i} src={img.src} alt={img.alt} />;
+          return <Image width={img.width} height={img.height} key={i} src={img.src} alt={img.alt} className="cursor-pointer" />;
         })}
-      </div>
+      </motion.div>
     </section>
   );
 }

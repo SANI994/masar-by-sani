@@ -60,11 +60,14 @@ const Hero = ({onHover}:HeroT) => {
     <div className={`${styles.hero} justify-start sm:justify-center pt-32`} onMouseOver={onMouseOver} onMouseLeave={onMouseOut}>
       
     
-      <div className={`${styles.text} pt-0 md:pt-16`}>
-      <h1 className='text-[54px] !text-[#5CECCE] sm:text-[64px]'>
-      نصنع صناع المنتجات
-                </h1>
-      <div className=' text-[28px] leading-10 sm:leading-[78px] mx-6 ]'>
+      <div
+        className={`${styles.text} pt-0 md:pt-2 flex flex-col justify-center items-center text-center`}
+        dir="rtl"
+      > 
+        <h1 className="text-[40px] !text-[#5CECCE] md:text-[64px] font-black">
+          #جرب_تصنع_منتج
+        </h1>
+        <div className="text-[28px] leading-10 sm:leading-[78px] mx-6 text-[#334961]">
       <p>  مسار من صانع هو طريقك لتترجم اهتمامك في        
       {" "}
        <AnimatePresence>
@@ -97,6 +100,8 @@ const Hero = ({onHover}:HeroT) => {
           <RegisterButton variant='secondry' classes='w-[290px] md:w-[440px] h-[62px] md:h-[48px]' />
         </div>
       </div>
+    
+    
     </div>
   );
 };

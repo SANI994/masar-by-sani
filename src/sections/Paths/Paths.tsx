@@ -1,15 +1,11 @@
 "use client";
 
-import { EVENT_PATHS } from "@/app/constants";
-import { PathText } from "./PathText";
-
 const Paths = () => {
   return (
-    <section id="tracks" className="p-4 md:p-8">
-      <div className="w-screen">
-        {EVENT_PATHS.map((path, i) => {
-          return <PathText heading={path.title} key={i} />;
-        })}
+    <section id="tracks" className="p-4 md:p-8 text-center">
+      <div className="flex flex-col justify-center items-center w-screen">
+      <h1 className="text-5xl font-semibold">مرحلة التدريب والتعليم </h1>
+      <p className="mt-4 text-[20px]">تنقسم مرحلة التدريب والتعليم الى ٤ مسارات </p>
       </div>
     </section>
   );

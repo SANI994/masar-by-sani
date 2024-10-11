@@ -2,6 +2,7 @@
 import React from "react";
 import { HACKATHON_TOC } from "@/app/constants";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface TOCProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -19,7 +20,7 @@ export default function TOC({ ...props }: TOCProps) {
         {HACKATHON_TOC.map((term, index) => {
           return (
             <motion.div whileHover={{scale:1.05}} whileTap={{scale:1.05}} key={index} className="flex flex-row items-start  gap-4 mb-2">
-              <img  src={term.image} width={28} className="rotate-180" />
+              <Image  src={term.image} width={28} height={28} alt="term" className="rotate-180" />
               <p  className="text-[#3D3D3D] text-[20px] select-none">{term.text}</p>
             </motion.div>
           );

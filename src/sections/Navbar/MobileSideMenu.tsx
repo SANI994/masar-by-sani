@@ -20,38 +20,39 @@ const Aside = styled("aside", {
 interface MobileSideProps {
   show: boolean;
   onSelectSection?: () => void;
+  showLogoOnly?:boolean
 }
 
-const MobileSideMenu = ({ show, onSelectSection }: MobileSideProps) => {
+const MobileSideMenu = ({ show, onSelectSection,showLogoOnly }: MobileSideProps) => {
   return (
     <Slide direction="left" dir="rtl" timeout={600} in={show} mountOnEnter unmountOnExit>
       <Aside>
         
-       
-        <div className="flex justify-center mt-20">
+       {!showLogoOnly &&  <div className="flex justify-center mt-20">
           <RegisterButton variant="secondry" classes="w-[90vw] h-[48px]" />
-        </div>
-
-        <ul onClick={onSelectSection} className="flex flex-col items-start my-12 mx-10 gap-6 text-[16px] font-medium">
+        </div>}
+       
+{ <ul onClick={onSelectSection} className="flex flex-col items-start my-12 mx-10 gap-6 text-[16px] font-medium">
           <li>
             <Link href="#">الرئيسية</Link>
           </li>
           <li>
-            <Link href="#about">عن المسابقة</Link>
+            <Link href="#about">عن البرنامج</Link>
           </li>
           <li>
-            <Link href="#goals">الأهداف</Link>
+            <Link href="#goals">المراحل</Link>
           </li>
           <li>
             <Link href="#tracks">المسارات</Link>
           </li>
           <li>
-            <Link href="#timeline">مراحل المشاركة</Link>
+            <Link href="#timeline">الخط الزمني</Link>
           </li>
           <li>
             <Link href="#terms">الشروط</Link>
           </li>
-        </ul>
+        </ul>}
+       
       </Aside>
     </Slide>
   );

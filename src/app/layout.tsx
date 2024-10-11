@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -16,6 +17,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Masar By Sani - مسار من صانع",
   description: " مسار من صانع هو طريقك لتترجم اهتمامك في الذكاء الاصطناعي، هندسة البرمجيات، تجربة المستخدم، وإدارة المنتجات لمنتج رقمي جاهز",
+  icons:[]
 };
 
 export default function RootLayout({
@@ -25,6 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased gradient`}
       >

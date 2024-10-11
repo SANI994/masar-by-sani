@@ -85,6 +85,7 @@ body {
 
 body {
   color: #334961;
+  font-family: inherit;
   /* background: #F6FBFF; */
 }
 

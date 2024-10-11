@@ -7,6 +7,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import styles from './faq.module.scss';
 import { HACKATHON_QUESTIONS } from '@/app/constants';
 import React from 'react';
+import Image from 'next/image';
 
 
 
@@ -22,7 +23,7 @@ export default function Questions() {
                  }
                   return (
             <MuiAccordion key={i} disableGutters elevation={0} square className={styles.accordion}   >
-                    <MuiAccordionSummary aria-controls="panel1d-content" onClick={handleExpand} expandIcon={<img src={expanded ? "./icons/arrow-up.svg" : "./icons/arrow-down.svg"} width={12} height={12} alt='arrow' />}>
+                    <MuiAccordionSummary aria-controls="panel1d-content" onClick={handleExpand} expandIcon={<Image src={expanded ? "./icons/arrow-up.svg" : "./icons/arrow-down.svg"} width={12} height={12} alt='arrow' />}>
                       <p className='text-[#828080] text-[14px] md:text-[20px]'>السؤال: { elem.question}</p>
       
                     </MuiAccordionSummary>

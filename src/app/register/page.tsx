@@ -2,30 +2,36 @@
 /* eslint-disable */
 import RolesCards from "@/sections/RolesCards";
 import { useState } from "react";
-import { REGISTERATION_SCREENS } from "../constants";
+import { REGISTERATION_SCREENS, RolesList } from "../constants";
 import PersonalInfo from "@/sections/PersonalInfo";
 import WorkInfo from "@/sections/WorkInfo";
 import ThankYou from "@/sections/ThankYou";
-import styles from "./Register.module.scss";
-import { useForm, SubmitHandler } from "react-hook-form";
-import "./Register.css"
+import { useForm } from "react-hook-form";
+import "./Register.css";
+import Navbar from "@/sections/Navbar";
+import axios from "axios";
+import Alert from "@mui/material/Alert";
+import Footer from "@/sections/footer";
+
+type RoleProps = {
+  image: string;
+  name: string;
+  id: number;
+  value: string;
+};
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    getValues,
-    formState: { errors },
-  } = useForm<any>();
-
+  const { register, handleSubmit, getValues } = useForm<any>();
+  const [formSubmiting, setFormSubmitting] = useState(false);
+  const [backendErrors, setBackendErrors] = useState<any>([]);
   const [currentScreen, setCurrentScreen] = useState(REGISTERATION_SCREENS[0]);
+  const [selectedRole, setSelectedRole] = useState<RoleProps>({} as RoleProps);
 
   const onNextScreen = () => {
     const nextScreen = REGISTERATION_SCREENS.find(
       (screen) => screen.current == currentScreen.next
     );
+    console.log(nextScreen);
     if (nextScreen) setCurrentScreen(nextScreen);
   };
   const onPrevScreen = () => {
@@ -35,51 +41,127 @@ const Register = () => {
     if (prevScreen) setCurrentScreen(prevScreen);
   };
   const onRoleSelected = (id: number) => {
-    console.log("The selected Role is: ", id);
+    const role = RolesList.find((role) => role.id == id);
+    if (role) setSelectedRole(role);
+    setCurrentScreen(REGISTERATION_SCREENS[1]);
   };
 
-
-  const onSubmit = (data:any)=>{
-      // call the backend https://maser-app-x6wzd.ondigitalocean.app/swagger/index.html
-      console.log(data)
-  }
+  const onSubmit = (data: any) => {
+    const SubmitURL =
+      "https://maser-app-x6wzd.ondigitalocean.app/api/educationForm/submit";
+    // call the backend https://maser-app-x6wzd.ondigitalocean.app/swagger/index.html
+    data["program"] = selectedRole.value;
+    data["why_maser_why_do_you_think_you_are_a_candidate"] = "-";
+    setFormSubmitting(true);
+    if (!formSubmiting) {
+      axios
+        .post(SubmitURL, data)
+        .then((data) => {
+          console.log(data, " :response");
+          setFormSubmitting(false);
+          setCurrentScreen(REGISTERATION_SCREENS[3]);
+        })
+        .catch(({ response }) => {
+          if (response?.data?.errors) {
+            const errors =
+              Object.entries(response.data.errors).map((e) => e[1]) || [];
+            setBackendErrors(errors);
+            console.log(errors);
+          }
+          if (response.data.message) {
+            setBackendErrors([response.data.message]);
+          }
+          setFormSubmitting(false);
+        });
+    }
+  };
+  const onClearError = () => {
+    setBackendErrors([]);
+  };
   return (
-    <main className="">
-      <section className="flex flex-col items-center justify-center h-screen  text-[#5CECCE] mx-6">
+    <div className="flex flex-col items-center">
+      <Navbar showLogoOnly />
 
-     
-        {currentScreen.current == "roles_screen" && (
-          <RolesCards onRoleSelected={onRoleSelected} />
-        )}
-         <form onSubmit={handleSubmit(onSubmit)}>
-        {currentScreen.current == "personal_info_screen" && <PersonalInfo formInputs={register} />}
-        {currentScreen.current == "work_info_screen" && <WorkInfo formInputs={register} />}
-        {currentScreen.current == "thank_you_screen" && <ThankYou />}
-        <button type="submit">Submit</button>
-        <div className="flex w-full justify-evenly text-lg">
-        {!!currentScreen.next ? (
-          <p className="cursor-pointer" onClick={onNextScreen}>
-            {" "}
-            ⬅️{" "}
-          </p>
-        ) : (
-          <span></span>
+      <main className="flex flex-col items-center justify-center mt-32 md:mt-16 mb-10">
+        {!!backendErrors && (
+          <div className="fixed top-20 flex flex-col justify-center items-center z-40">
+            {backendErrors?.map((error: any, i: number) => (
+              <Alert
+                key={i}
+                onClick={onClearError}
+                className={` mt-6 z-50 right-0`}
+                severity="error"
+                id="error-message"
+              >
+                {error}
+              </Alert>
+            ))}
+          </div>
         )}
 
-        {!!currentScreen.prev ? (
-          <p onClick={onPrevScreen} className="cursor-pointer">
-            ➡️
-          </p>
-        ) : (
-          <span></span>
-        )}
-      </div>
-      
-</form>
-      </section>
+        <section className="flex flex-col items-center justify-center  text-[#5CECCE] ">
+          {currentScreen.current == "roles_screen" && (
+            <RolesCards onRoleSelected={onRoleSelected} />
+          )}
 
-     
-    </main>
+          {currentScreen.current != "roles_screen" && (
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+              {!!currentScreen.prev &&
+              currentScreen.current != "thank_you_screen" ? (
+                <div
+                  className="flex flex-row-reverse gap-4 mt-4 md:mt-14 mb-4 cursor-pointer"
+                  dir="ltr"
+                  onClick={onPrevScreen}
+                >
+                  <img
+                    src="./icons/arrow-down.svg"
+                    width={18}
+                    className="rotate-[270deg] cursor-pointer"
+                  />
+                  <p className="text-sm font-semibold text-[#334961]">العودة</p>
+                </div>
+              ) : (
+                <></>
+              )}
+              {currentScreen.current == "personal_info_screen" && (
+                <PersonalInfo formInputs={register} values={getValues} />
+              )}
+              {currentScreen.current == "work_info_screen" && (
+                <WorkInfo formInputs={register} />
+              )}
+              {currentScreen.current == "thank_you_screen" && <ThankYou />}
+
+              {!!currentScreen.next && (
+                <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
+                  {!!currentScreen.next && !!currentScreen.prev ? (
+                    <div
+                      className="registerBtn cursor-pointer px-4"
+                      onClick={onNextScreen}
+                    >
+                      <p>التالي</p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              )}
+              {currentScreen.current == "work_info_screen" && (
+                <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
+                  <button
+                    type={formSubmiting ? "button" : "submit"}
+                    className="registerBtn"
+                  >
+                    {formSubmiting ? "جاري التحميل" : "إرسال"}
+                  </button>
+                </div>
+              )}
+            </form>
+          )}
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 
