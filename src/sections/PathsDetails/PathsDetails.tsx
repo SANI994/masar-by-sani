@@ -20,12 +20,12 @@ const PathsDetails = () => {
               <h2 className="font-medium">{pathDetails.title}</h2>
             </div>
             <motion.div
-              className="flex flex-col items-start justify-center md:flex-row gap-5 w-[90%] h-full my-4 bg-transparent"
+              className="flex flex-col items-start justify-center md:flex-row gap-5 w-[80vw] h-full my-4 bg-transparent"
               key={i}
             >
-              <div className="flex flex-col items-center justify-center w-full md:w-[400px] h-80 md:h-[260px] border-b border-l-0 md:border-b-0 md:border-l border-gray-300">
+              <div className="flex flex-col items-center justify-center gap-6 w-full md:w-[400px] h-80 md:h-[260px] border-b border-l-0 md:border-b-0 md:border-l border-gray-300">
                 <Image
-                  width={180}
+                  width={240}
                   height={240}
                   alt="speaker logo"
                   src={pathDetails.image}

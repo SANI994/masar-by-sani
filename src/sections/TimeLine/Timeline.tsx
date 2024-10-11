@@ -1,7 +1,6 @@
 /* eslint-disable */
 "use client";
 import React from "react";
-import TimelineComp from "@mui/lab/Timeline";
 import TimeLineCard from "./timelineCard";
 import { Title } from "@/components/Texts";
 
@@ -9,15 +8,17 @@ interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Timeline = ({ ...props }: TimelineProps) => {
   return (
-    <div id="timeline" {...props} className="flex flex-col items-center justify-center w-screen">
+    <div
+      id="timeline"
+      {...props}
+      className="flex flex-col items-center justify-center w-screen"
+    >
       <div className="flex flex-col gap-4 items-center mb-14 pt-20 md:pt-28 w-full">
-        <Title title="الخط الزمني"/>
+        <Title title="الخط الزمني" />
       </div>
 
-      <TimelineComp
-        position="right"
-        className="text-lg ml-[-6vw] text-start"
-      >
+      <section className="flex flex-col justify-center items-center text-lg text-start w-screen">
+        
         <TimeLineCard
           icon="./icons/calender.svg"
           title="المرحلة الأولى"
@@ -60,7 +61,7 @@ const Timeline = ({ ...props }: TimelineProps) => {
           start_date="01-11-2025"
           isLast={true}
         />
-      </TimelineComp>
+      </section>
     </div>
   );
 };

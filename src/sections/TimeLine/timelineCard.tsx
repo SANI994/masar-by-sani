@@ -1,13 +1,10 @@
 "use client";
 /* eslint-disable */
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineItem from "@mui/lab/TimelineItem";
 import { motion } from "framer-motion";
-import { dateStringToISO } from "@/app/constants";
+import { dateStringToISO, isToday } from "@/app/constants";
 
 type TimeLineCardProps = {
   icon: string;
@@ -30,20 +27,20 @@ export default function TimeLineCard({
     month: "long",
     day: "numeric",
   };
-  const dateTemp = new Date(dateStringToISO(start_date)).toLocaleDateString("ar-eg", options);
-  const isDatePassed = new Date() > new Date(dateStringToISO(start_date));
+  const dateTemp = new Date(start_date.replace(/-/g, "/")).toLocaleDateString("ar-eg", options);
+  const isDatePassed = new Date() > new Date(start_date.replace(/-/g, "/"));
+  const isDateToday = isToday(new Date(start_date.replace(/-/g, "/")))
   return (
-    <TimelineItem className="flex flex-row w-[70vw]">
-      <TimelineOppositeContent
-        style={{ fontFamily: "inherit"}}
-        className={` ${isDatePassed ? 'opacity-50 font-light':'font-semibold'} text-end text-[18px] md:text-2xl`}
+    <section className="flex flex-row justify-center gap-6 w-full">
+      <div
+        className={` ${isDatePassed && !isDateToday ? 'opacity-50 font-light':'font-semibold'} w-full text-end text-[18px] md:text-2xl`}
         color="text.secondary"
       >
         {dateTemp}
-      </TimelineOppositeContent>
+      </div>
 
       <TimelineSeparator>
-        {!isDatePassed ? (
+        {!isDatePassed || isDateToday ? (
           <motion.div
             initial={{ scale: 1 }}
             animate={{ scale: 1.5 }}
@@ -51,26 +48,27 @@ export default function TimeLineCard({
           >
             <TimelineDot
               
-              sx={{ width: "14px", height: "14px", backgroundColor:"#5CECCE" }}
+              sx={{ width: "14px", height: "14px", backgroundColor: isDateToday? "#E9D502":"#5CECCE" }}
             />
           </motion.div>
         ) : (
           <div>
             <TimelineDot
-              color={"grey"}
-              sx={{ width: "14px", height: "14px" }}
+            
+              sx={{ width: "14px", height: "14px", backgroundColor:isDateToday ? "#E9D502":'grey' }}
             />
           </div>
         )}
 
-        {!isLast && <TimelineConnector sx={{ height: "80px",opacity: isDatePassed ? 0.5:1 }} />}
+        {!isLast && <TimelineConnector sx={{ height: "80px",opacity: isDatePassed && !isDateToday ? 0.5:1 }} />}
       </TimelineSeparator>
-      <TimelineContent
-        style={{ fontFamily: "inherit"}}
-        className={`${isDatePassed ? 'opacity-50 font-light':'font-semibold '} text-[18px] md:text-2xl`}
+      <div
+        className={`w-full ${isDatePassed && !isDateToday? 'opacity-50 font-light':'font-semibold '} text-[18px] md:text-2xl`}
       >
+        <p>
         {description}
-      </TimelineContent>
-    </TimelineItem>
+        </p>
+      </div>
+    </section>
   );
 }
