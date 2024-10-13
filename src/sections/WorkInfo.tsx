@@ -163,7 +163,7 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
           <input
             {...formInputs("talk_about_yourself_video")}
             required
-            placeholder="رابط الفيديو (يوتيوب , درايف, لووم ..إلخ)"
+            placeholder="رابط الفيديو مدة دقيقتين (يوتيوب , درايف, لووم ..إلخ)"
             type="text"
             className={"input"}
           />

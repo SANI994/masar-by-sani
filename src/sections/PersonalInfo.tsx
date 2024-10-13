@@ -75,7 +75,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
       <select
         {...formInputs("university")}
         id="University"
-        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-[#5cecce] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark: dark:focus:border-[#5cecce]"
       >
         <option value={""}>الجامعة</option>
         {UNIVERSITIES_LIST.map((university, i) => (
@@ -88,7 +88,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
       <select
         {...formInputs("college")}
         id="colleges"
-        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-[#5cecce] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark: dark:focus:border-[#5cecce]"
       >
         <option value={""}>الكلية</option>
         {COLLEGES_LIST.map((college, i) => (
@@ -108,7 +108,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
       <select
         id="expected_grad_year"
         {...formInputs("expected_grad_year")}
-        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-[#5cecce] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark: dark:focus:border-[#5cecce]"
       >
         <option value={""}>تاريخ التخرج المتوقع</option>
 
@@ -130,7 +130,7 @@ const PersonalInfo = ({ formInputs }: PersonalInfoProps) => {
          <select
         id="gpA_max_scale"
         {...formInputs("gpA_max_scale")}
-        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="input bg-transparent border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-[#5cecce] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark: dark:focus:border-[#5cecce]"
       >
         <option value={""}>GPA Max Scale  </option>
         <option value={"4"}> 4 </option>

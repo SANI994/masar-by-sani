@@ -92,7 +92,14 @@ useEffect(() => {
 
   useEffect(() => {
     if(watchWorkData.filter((data)=> !!data).length == watchWorkData.length){
-      setWorkDataValid(true)
+      try{
+        new URL(watch('talk_about_yourself_video'))
+        setWorkDataValid(true)
+      }catch{
+      setBackendErrors(['رابط الفيديو  في " لماذا مسار ؟ ولماذا ترى انك مناسب للبرنامج ؟" غير صحيح'])
+      }
+        
+     
       return
     }else{
       if (!workDataValid)
