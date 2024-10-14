@@ -78,7 +78,7 @@ const Register = () => {
     setBackendErrors([]);
   };
 const watchPersonalData = watch(["full_name", "full_name_arabic","email","id_number","phone_number","university","college", "major", "expected_grad_year", "gpA_max_scale", "cumulative_GPA"])
-const watchWorkData = watch(["work_experiences", "project_course","why_did_you_choose_this_track","talk_about_yourself_video","phone_number","linkedin","anything_else_you_want_to_tell_us"])
+const watchWorkData = watch([ "project_course","why_did_you_choose_this_track","talk_about_yourself_video","phone_number","linkedin","anything_else_you_want_to_tell_us"])
 useEffect(() => {
     if(watchPersonalData.filter((data)=> !!data).length == watchPersonalData.length){
       setPersonalDataValid(true)

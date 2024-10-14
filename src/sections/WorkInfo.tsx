@@ -83,7 +83,7 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
                   <input
                     {...formInputs(`work_experiences.${index}.company_name`)}
                     required
-                    placeholder="الشركة"
+                    placeholder="الشركة (في حال وجد)"
                     type="text"
                     className={"input"}
                   />
@@ -93,7 +93,7 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
                       `work_experiences.${index}.describe_your_role`
                     )}
                     required
-                    placeholder="صف وظيفتك"
+                    placeholder=" صف وظيفتك (في حال وجد)"
                     type="text"
                     className={"input"}
                   />
