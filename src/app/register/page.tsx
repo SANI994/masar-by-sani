@@ -52,6 +52,13 @@ const Register = () => {
       "https://maser-app-x6wzd.ondigitalocean.app/api/educationForm/submit";
     data["program"] = selectedRole.value;
     data["why_maser_why_do_you_think_you_are_a_candidate"] = "-";
+    if (!data["work_experiences"]?.start_date && !data["work_experiences"]?.end_date){
+      data["work_experiences"] = [
+       { start_date:new Date(),
+         end_data: new Date(),company_name:"-",describe_your_role:"-"}
+      ]
+    }
+    console.log(data);
     setFormSubmitting(true);
     if (!formSubmiting && workDataValid && personalDataValid) {
       axios

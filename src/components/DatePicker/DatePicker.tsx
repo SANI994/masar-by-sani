@@ -29,6 +29,25 @@ const MONTH_NAMES = [
 const OLD_YEAR = 1970;
 const MAX_YEAR = new Date().getFullYear() + 3;
 
+interface DatePickerProps{
+  isOpen:boolean
+  onClose?:()=>void;
+ title:string;
+ dayNames?:string[];
+ headerFormat?:string;
+ showTitle?:boolean;
+ monthNames?:string[];
+ defaultValue?:Date | null;
+ minDate?:Date;
+ maxDate?:Date;
+ colorScheme?:string;
+ headerTextColor?:string;
+ closeText?:string;
+ clearText?:string;
+ onChange:(data:string | null)=>void
+
+}
+
 const DatePicker = ({
   isOpen: showCalendar,
   onClose,
@@ -45,7 +64,7 @@ const DatePicker = ({
   closeText = "Close",
   clearText = "Clear",
   onChange,
-}:any) => {
+}:DatePickerProps) => {
   const [isOpen, setIsOpen] = React.useState(showCalendar);
   const [calendar, setCalendar] = React.useState<any>([]);
   const [days] = React.useState(dayNames?.length === 7 ? dayNames : DAY_NAMES);

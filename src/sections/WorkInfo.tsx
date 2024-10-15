@@ -28,6 +28,7 @@ interface WorkInfoProps {
 const WorkInfo = ({ formInputs }: WorkInfoProps) => {
   const [workExperinces, setWorkExperinces] = useState(1);
   const [projectCourseCount, setprojectCourseCount] = useState(1);
+  
 
   const onAddWorkExperince = () => {
     if (workExperinces < 5) setWorkExperinces(workExperinces + 1);
@@ -42,6 +43,10 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
   const onDeleteprojectCourseCount = () => {
     if (projectCourseCount > 1) setprojectCourseCount(projectCourseCount - 1);
   };
+  // const [workEndDateOpen, setWorkEndDateOpen] = useState(false);
+  // const onWorEndDateClicked = ()=>{
+  //   setWorkEndDateOpen(workEndDateOpen ? false:true)
+  // }
 
   return (
     <div id="work-section" className="flex flex-col gap-4 w-[280px] md:w-[829px] mt-4" dir="rtl">
@@ -68,21 +73,25 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
                 <div className="flex flex-col gap-2 w-full mt-10" key={index}>
                   <input
                     {...formInputs(`work_experiences.${index}.start_date`)}
-                    required
+                    
                     placeholder="تاريخ البدء"
                     type="date"
                     className={"input"}
                   />
+                  <>
                   <input
                     {...formInputs(`work_experiences.${index}.end_date`)}
-                    required
+                    
                     placeholder="تاريخ الانتهاء"
                     type="date"
-                    className={"input"}
+                    className={"input cursor-pointer"}
+                   
                   />
+                  {/* <DatePicker isOpen={workEndDateOpen} onChange={(data)=> console.log(data)} title="End Date" /> */}
+                  </>
                   <input
                     {...formInputs(`work_experiences.${index}.company_name`)}
-                    required
+                    
                     placeholder="الشركة (في حال وجد)"
                     type="text"
                     className={"input"}
@@ -92,7 +101,6 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
                     {...formInputs(
                       `work_experiences.${index}.describe_your_role`
                     )}
-                    required
                     placeholder=" صف وظيفتك (في حال وجد)"
                     type="text"
                     className={"input"}
