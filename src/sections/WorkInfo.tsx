@@ -135,14 +135,12 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
               <div className="flex flex-col gap-2  mt-10" key={i}>
                 <input
                   {...formInputs(`project_course.${i}.completion_date`)}
-                  required
                   placeholder="completion_date"
                   type="date"
                   className={"input"}
                 />
                 <input
                   {...formInputs(`project_course.${i}.description_of_project`)}
-                  required
                   placeholder="وصف المشروع"
                   type="text"
                   className={"input"}

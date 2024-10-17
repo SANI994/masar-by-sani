@@ -52,10 +52,19 @@ const Register = () => {
       "https://maser-app-x6wzd.ondigitalocean.app/api/educationForm/submit";
     data["program"] = selectedRole.value;
     data["why_maser_why_do_you_think_you_are_a_candidate"] = "-";
-    if (!data["work_experiences"]?.start_date && !data["work_experiences"]?.end_date){
+    if (!data["work_experiences"]?.[0]?.start_date && !data["work_experiences"]?.[0]?.end_date){
       data["work_experiences"] = [
        { start_date:new Date(),
          end_data: new Date(),company_name:"-",describe_your_role:"-"}
+      ]
+    }
+    if (!data["project_course"]?.[0]?.completion_date){
+      data["project_course"] = [
+       {
+         completion_date:new Date(),
+         description_of_project: data["project_course"]?.["description_of_project"] || "-"
+      
+        }
       ]
     }
     console.log(data);
