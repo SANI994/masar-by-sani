@@ -21,7 +21,7 @@ type RoleProps = {
 };
 
 const Register = () => {
-  const { register, handleSubmit, getValues,watch } = useForm<any>();
+  const { register, handleSubmit, getValues, watch } = useForm<any>();
   const [formSubmiting, setFormSubmitting] = useState(false);
   const [personalDataValid, setPersonalDataValid] = useState(false);
   const [workDataValid, setWorkDataValid] = useState(false);
@@ -50,23 +50,38 @@ const Register = () => {
   const onSubmit = (data: any) => {
     const SubmitURL =
       "https://maser-app-x6wzd.ondigitalocean.app/api/educationForm/submit";
+  
+  try{
     data["program"] = selectedRole.value;
     data["why_maser_why_do_you_think_you_are_a_candidate"] = "-";
-    if (!data["work_experiences"]?.[0]?.start_date && !data["work_experiences"]?.[0]?.end_date){
+    if (
+      !data["work_experiences"]?.[0]?.start_date &&
+      !data["work_experiences"]?.[0]?.end_date
+    ) {
       data["work_experiences"] = [
-       { start_date:new Date(),
-         end_data: new Date(),company_name:"-",describe_your_role:"-"}
-      ]
+        {
+          start_date: new Date(),
+          end_data: new Date(),
+          company_name: "-",
+          describe_your_role: "-",
+        },
+      ];
     }
-    if (!data["project_course"]?.[0]?.completion_date){
+    if (!data["project_course"]?.[0]?.completion_date) {
       data["project_course"] = [
-       {
-         completion_date:new Date(),
-         description_of_project: data["project_course"]?.["description_of_project"] || "-"
-      
-        }
-      ]
+        {
+          completion_date: new Date(),
+          description_of_project:
+            data["project_course"]?.["description_of_project"] || "-",
+        },
+      ];
     }
+  }catch{
+    setBackendErrors(["حدث خطأ ما اثناء معالجة البيانات الرجاء المحالولة لاحقاً"])
+  }
+    
+
+
     console.log(data);
     setFormSubmitting(true);
     if (!formSubmiting && workDataValid && personalDataValid) {
@@ -93,35 +108,53 @@ const Register = () => {
   const onClearError = () => {
     setBackendErrors([]);
   };
-const watchPersonalData = watch(["full_name", "full_name_arabic","email","id_number","phone_number","university","college", "major", "expected_grad_year", "gpA_max_scale", "cumulative_GPA"])
-const watchWorkData = watch([ "project_course","why_did_you_choose_this_track","talk_about_yourself_video","phone_number","linkedin","anything_else_you_want_to_tell_us"])
-useEffect(() => {
-    if(watchPersonalData.filter((data)=> !!data).length == watchPersonalData.length){
-      setPersonalDataValid(true)
-      return
-    }else{
-      if (!personalDataValid)
-        setPersonalDataValid(false)
+  const watchPersonalData = watch([
+    "full_name",
+    "full_name_arabic",
+    "email",
+    "id_number",
+    "phone_number",
+    "university",
+    "college",
+    "major",
+    "expected_grad_year",
+    "gpA_max_scale",
+    "cumulative_GPA",
+  ]);
+  const watchWorkData = watch([
+    "project_course",
+    "why_did_you_choose_this_track",
+    "talk_about_yourself_video",
+    "phone_number",
+    "linkedin",
+    "anything_else_you_want_to_tell_us",
+  ]);
+  useEffect(() => {
+    if (
+      watchPersonalData.filter((data) => !!data).length ==
+      watchPersonalData.length
+    ) {
+      setPersonalDataValid(true);
+      return;
+    } else {
+      if (!personalDataValid) setPersonalDataValid(false);
     }
-   
   }, [watchPersonalData]);
 
   useEffect(() => {
-    if(watchWorkData.filter((data)=> !!data).length == watchWorkData.length){
-      try{
-        new URL(watch('talk_about_yourself_video'))
-        setWorkDataValid(true)
-      }catch{
-      setBackendErrors(['رابط الفيديو  في " لماذا مسار ؟ ولماذا ترى انك مناسب للبرنامج ؟" غير صحيح'])
+    if (watchWorkData.filter((data) => !!data).length == watchWorkData.length) {
+      try {
+        new URL(watch("talk_about_yourself_video"));
+        setWorkDataValid(true);
+      } catch {
+        setBackendErrors([
+          'رابط الفيديو  في " لماذا مسار ؟ ولماذا ترى انك مناسب للبرنامج ؟" غير صحيح',
+        ]);
       }
-        
-     
-      return
-    }else{
-      if (!workDataValid)
-        setWorkDataValid(false)
+      return;
+    } else {
+      if (!workDataValid) setWorkDataValid(false);
     }
-   
   }, [watchWorkData]);
 
   return (
@@ -181,7 +214,11 @@ useEffect(() => {
                 <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
                   {!!currentScreen.next && !!currentScreen.prev ? (
                     <div
-                      className={`cursor-pointer px-4 ${!personalDataValid ? "InValidregisterBtn":"registerBtn"}`}
+                      className={`cursor-pointer px-4 ${
+                        !personalDataValid
+                          ? "InValidregisterBtn"
+                          : "registerBtn"
+                      }`}
                       onClick={onNextScreen}
                     >
                       <p>التالي</p>
@@ -195,7 +232,9 @@ useEffect(() => {
                 <div className="flex w-full justify-between text-lg bg-white p-4 -mt-2">
                   <button
                     type={formSubmiting ? "button" : "submit"}
-                    className={`${!workDataValid? 'InValidregisterBtn':'registerBtn'}`}
+                    className={`${
+                      !workDataValid ? "InValidregisterBtn" : "registerBtn"
+                    }`}
                   >
                     {formSubmiting ? "جاري التحميل" : "إرسال"}
                   </button>
