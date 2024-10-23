@@ -4,7 +4,7 @@ import RolesCards from "@/sections/RolesCards";
 import { useEffect, useState } from "react";
 import { REGISTERATION_SCREENS, RolesList } from "../constants";
 import PersonalInfo from "@/sections/PersonalInfo";
-import WorkInfo from "@/sections/WorkInfo";
+import WorkInfo, { ProjectCourseProps, workExperiencesProps } from "@/sections/WorkInfo";
 import ThankYou from "@/sections/ThankYou";
 import { useForm } from "react-hook-form";
 import "./Register.css";
@@ -12,6 +12,7 @@ import Navbar from "@/sections/Navbar";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import Footer from "@/sections/footer";
+import moment from "moment";
 
 type RoleProps = {
   image: string;
@@ -21,7 +22,7 @@ type RoleProps = {
 };
 
 const Register = () => {
-  const { register, handleSubmit, getValues, watch } = useForm<any>();
+  const { register, handleSubmit, getValues, watch,setValue } = useForm<any>();
   const [formSubmiting, setFormSubmitting] = useState(false);
   const [personalDataValid, setPersonalDataValid] = useState(false);
   const [workDataValid, setWorkDataValid] = useState(false);
@@ -76,6 +77,17 @@ const Register = () => {
         },
       ];
     }
+    data['work_experiences'] = data['work_experiences']?.map((work:workExperiencesProps)=> ({
+      ...work,
+      start_date: moment(work.start_date || "").toDate(),
+      end_date: moment(work.end_date || "").toDate(),
+     
+    }))
+
+    data['project_course'] = data['project_course']?.map((course:ProjectCourseProps)=> ({
+      ...course,
+      completion_date: moment(course.completion_date || "").toDate()
+    }))
   }catch{
     setBackendErrors(["حدث خطأ ما اثناء معالجة البيانات الرجاء المحالولة لاحقاً"])
   }
@@ -206,7 +218,7 @@ const Register = () => {
                 <PersonalInfo formInputs={register} values={getValues} />
               )}
               {currentScreen.current == "work_info_screen" && (
-                <WorkInfo formInputs={register} />
+                <WorkInfo formInputs={register} setValue={setValue} />
               )}
               {currentScreen.current == "thank_you_screen" && <ThankYou />}
 

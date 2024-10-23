@@ -1,13 +1,16 @@
+"use client";
+/* eslint-disable */
+import DatePicker from "@/components/DatePicker";
 import { useState } from "react";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 
-interface workExperiencesProps {
+export interface workExperiencesProps {
   start_date: string;
   end_date: string;
   company_name: string;
   describe_your_role: string;
 }
-interface ProjectCourseProps {
+export interface ProjectCourseProps {
   completion_date: string;
   description_of_project: string;
 }
@@ -23,12 +26,27 @@ interface workInfoFormProps {
 }
 interface WorkInfoProps {
   formInputs: UseFormRegister<workInfoFormProps>;
+  setValue: UseFormSetValue<any>;
 }
 
-const WorkInfo = ({ formInputs }: WorkInfoProps) => {
+const WorkInfo = ({ formInputs, setValue }: WorkInfoProps) => {
   const [workExperinces, setWorkExperinces] = useState(1);
   const [projectCourseCount, setprojectCourseCount] = useState(1);
-  
+  const [workEndDateOpen, setWorkEndDateOpen] = useState("");
+  const [workStartDateOpen, setWorkStartDateOpen] = useState("");
+  const [completionDateOpen, setCompletionDateOpen] = useState("");
+  const onWorEndDateClicked = ({ target }: any) => {
+    const { name } = target || "";
+    setWorkEndDateOpen(name);
+  };
+  const onWorkStartDateClicked = ({ target }: any) => {
+    const { name } = target || "";
+    setWorkStartDateOpen(name);
+  };
+  const onCompletionDatClicked = ({ target }: any) => {
+    const { name } = target || "";
+    setCompletionDateOpen(name);
+  };
 
   const onAddWorkExperince = () => {
     if (workExperinces < 5) setWorkExperinces(workExperinces + 1);
@@ -43,13 +61,13 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
   const onDeleteprojectCourseCount = () => {
     if (projectCourseCount > 1) setprojectCourseCount(projectCourseCount - 1);
   };
-  // const [workEndDateOpen, setWorkEndDateOpen] = useState(false);
-  // const onWorEndDateClicked = ()=>{
-  //   setWorkEndDateOpen(workEndDateOpen ? false:true)
-  // }
 
   return (
-    <div id="work-section" className="flex flex-col gap-4 w-[280px] md:w-[829px] mt-4" dir="rtl">
+    <div
+      id="work-section"
+      className="flex flex-col gap-4 w-[280px] md:w-[829px] mt-4"
+      dir="rtl"
+    >
       <section className="flex w-full relative">
         <p
           className="flex items-center justify-center absolute bg-white rounded-xl font-bold text-xl md:text-3xl h-16 md:h-20 -right-8 md:-right-14 w-[26px] md:w-[53px] text-center p-2 md:p-4 cursor-pointer"
@@ -71,27 +89,52 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
             .map((n, index) => {
               return (
                 <div className="flex flex-col gap-2 w-full mt-10" key={index}>
-                  <input
-                    {...formInputs(`work_experiences.${index}.start_date`)}
-                    
-                    placeholder="تاريخ البدء"
-                    type="date"
-                    className={"input"}
-                  />
                   <>
-                  <input
-                    {...formInputs(`work_experiences.${index}.end_date`)}
-                    
-                    placeholder="تاريخ الانتهاء"
-                    type="date"
-                    className={"input cursor-pointer"}
-                   
-                  />
-                  {/* <DatePicker isOpen={workEndDateOpen} onChange={(data)=> console.log(data)} title="End Date" /> */}
+                    <DatePicker
+                      title="تاريخ البدء"
+                      isOpen={
+                        workStartDateOpen ==
+                        `work_experiences.${index}.start_date`
+                      }
+                      onChange={(data) => 
+                        setValue(`work_experiences.${index}.start_date`, data)
+                      }
+                      onClose={() => setWorkStartDateOpen("")}
+                    />
+                    <input
+                      {...formInputs(`work_experiences.${index}.start_date`)}
+                      onClick={onWorkStartDateClicked}
+                      readOnly
+                      name={`work_experiences.${index}.start_date`}
+                      placeholder="تاريخ البدء"
+                      type="text"
+                      className={"input cursor-pointer"}
+                    />
+                  </>
+
+                  <>
+                    <DatePicker
+                      title="تاريخ الانتهاء"
+                      isOpen={
+                        workEndDateOpen == `work_experiences.${index}.end_date`
+                      }
+                      onChange={(data) =>
+                       setValue(`work_experiences.${index}.end_date`,data)
+                      }
+                      onClose={() => setWorkEndDateOpen("")}
+                    />
+                    <input
+                      {...formInputs(`work_experiences.${index}.end_date`)}
+                      onClick={onWorEndDateClicked}
+                      name={`work_experiences.${index}.end_date`}
+                      readOnly
+                      placeholder="تاريخ الانتهاء"
+                      type="text"
+                      className={"input cursor-pointer"}
+                    />
                   </>
                   <input
                     {...formInputs(`work_experiences.${index}.company_name`)}
-                    
                     placeholder="الشركة (في حال وجد)"
                     type="text"
                     className={"input"}
@@ -133,12 +176,29 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
           .map((n, i) => {
             return (
               <div className="flex flex-col gap-2  mt-10" key={i}>
-                <input
+                <>
+                <DatePicker
+                      title="تاريخ الاكمال"
+                      isOpen={
+                        completionDateOpen ==
+                        `project_course.${i}.completion_date`
+                      }
+                      onChange={(data) =>
+                        setValue(`project_course.${i}.completion_date`, data)
+                      }
+                      onClose={() => setCompletionDateOpen("")}
+                    />
+               <input
                   {...formInputs(`project_course.${i}.completion_date`)}
-                  placeholder="completion_date"
-                  type="date"
-                  className={"input"}
+                  onClick={onCompletionDatClicked}
+                  readOnly
+                  name={`project_course.${i}.completion_date`}
+                  placeholder="تاريخ الاكمال"
+                  type="text"
+                  className={"input cursor-pointer"}
                 />
+                </>
+               
                 <input
                   {...formInputs(`project_course.${i}.description_of_project`)}
                   placeholder="وصف المشروع"
@@ -174,9 +234,7 @@ const WorkInfo = ({ formInputs }: WorkInfoProps) => {
             className={"input"}
           />
 
-<h1 className="text-[#334961]  my-4  font-semibold">
-وسائل تواصل
-        </h1>
+          <h1 className="text-[#334961]  my-4  font-semibold">وسائل تواصل</h1>
           <input
             {...formInputs("linkedin")}
             placeholder="لينكد إن"

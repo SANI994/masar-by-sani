@@ -72,7 +72,7 @@ const DatePicker = ({
     monthNames?.length === 12 ? monthNames : MONTH_NAMES
   );
   const [month, setMonth] = React.useState(0);
-  const [year, setYear] = React.useState(2022);
+  const [year, setYear] = React.useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = React.useState(defaultValue);
   const dbRef = React.useRef<any>(null);
   const lbRef = React.useRef<any>(null);
@@ -91,14 +91,19 @@ const DatePicker = ({
     setMonth(curMonth);
     setYear(curYear);
   };
-
+  const options: any = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   const selectDate = (day:any) => {
+    const processedDate = day.toLocaleDateString("en-AU", options);
     setMonth(day.getMonth());
     setYear(day.getFullYear());
     // setDate(day.getDate())
     setSelectedDate(day);
-
-    onChange && onChange(day);
+    onChange && onChange(processedDate);
   };
 
   const getHeader = () => {
