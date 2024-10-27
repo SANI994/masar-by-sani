@@ -274,7 +274,7 @@ export const HACKATHON_TOC = [
   
 ];
 
-export const EVENT_START_DATE = "10-27-2024"
+export const EVENT_START_DATE = "10-29-2024"
 
 export const UNIVERSITIES_LIST = [
  "جامعة الملك سعود" ,
