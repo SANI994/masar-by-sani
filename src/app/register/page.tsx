@@ -62,7 +62,7 @@ const Register = () => {
       data["work_experiences"] = [
         {
           start_date: new Date(),
-          end_data: new Date(),
+          end_date: new Date(),
           company_name: "-",
           describe_your_role: "-",
         },
