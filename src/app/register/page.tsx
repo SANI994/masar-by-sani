@@ -2,7 +2,7 @@
 /* eslint-disable */
 import RolesCards from "@/sections/RolesCards";
 import { useEffect, useState } from "react";
-import { REGISTERATION_SCREENS, RolesList } from "../constants";
+import { EVENT_START_DATE, REGISTERATION_SCREENS, RolesList } from "../constants";
 import PersonalInfo from "@/sections/PersonalInfo";
 import WorkInfo, { ProjectCourseProps, workExperiencesProps } from "@/sections/WorkInfo";
 import ThankYou from "@/sections/ThankYou";
@@ -169,6 +169,12 @@ const Register = () => {
     }
   }, [watchWorkData]);
 
+
+  const endRegisterDate = new Date(EVENT_START_DATE.replace(/-/g, '/'));
+
+  if( endRegisterDate.getTime() < new Date().getTime()) {
+    return <></>;
+  }
   return (
     <div className="flex flex-col items-center">
       <Navbar showLogoOnly />
